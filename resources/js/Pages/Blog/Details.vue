@@ -1,7 +1,11 @@
 <template>
     <h1>Details{{blog_id}}</h1>
-    <h2>db.[blog_id].title</h2>
-    <p>db.[blog_id].body</p>
+    <div v-for="head in db" :key="head.id">
+        <div v-if="head.id == blog_id">]
+            <h2>{{head.title}}</h2>
+            <p>{{head.body}}</p>
+        </div>
+    </div>
 </template>
 <script>
 import qs from 'qs'
@@ -11,8 +15,7 @@ import {db} from '@/components/staticdb.vue'
             let uri = window.location.href.split('?');
             let id = qs.parse(uri[1]);
             
-            let blog_id = id.id
-            
+            let blog_id = id.id            
             return{ blog_id, db }
         }
     }
